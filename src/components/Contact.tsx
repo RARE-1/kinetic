@@ -271,9 +271,9 @@ export default function Contact() {
                           className="bg-zinc-950 border border-zinc-850 p-2.5 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500 transition font-sans cursor-pointer"
                         >
                           <option value="unspecified">Select budget</option>
-                          <option value="lt-10k">&lt; $10,000</option>
-                          <option value="10k-25k">$10,000 - $25,000</option>
-                          <option value="gt-25k">$25,000 +</option>
+                          {/* <option value="lt-10k">&lt; $10,000</option> */}
+                          <option value="10k-25k">Let's Discuss</option>
+                          {/* <option value="gt-25k">$25,000 +</option> */}
                         </select>
                       </div>
 
