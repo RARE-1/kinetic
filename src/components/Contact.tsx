@@ -23,13 +23,13 @@ export default function Contact() {
   const getEstimationStats = () => {
     switch (projectType) {
       case 'native-app':
-        return { duration: '4-6 Weeks', team: 'Bespoke Builder', complexity: 'Complete Menu + Ordering', baseRate: '$4,800+' };
+        return { duration: '4-6 Weeks', team: 'Bespoke Builder', complexity: 'Complete Menu + Ordering', baseRate: '$- on Demand' };
       case 'architecture':
-        return { duration: '3-4 Weeks', team: 'Bespoke Builder', complexity: 'Calendar diaries + SMS alerts', baseRate: '$3,500+' };
+        return { duration: '3-4 Weeks', team: 'Bespoke Builder', complexity: 'Calendar diaries + SMS alerts', baseRate: '$- on Demand' };
       case 'performance':
-        return { duration: '3-5 Weeks', team: 'Bespoke Builder', complexity: 'Member cards + RSVPs', baseRate: '$4,205+' };
+        return { duration: '3-5 Weeks', team: 'Bespoke Builder', complexity: 'Member cards + RSVPs', baseRate: '$- on Demand' };
       case 'hardware':
-        return { duration: '2-4 Weeks', team: 'Bespoke Builder', complexity: 'RETINA catalogs + Apple Pay', baseRate: '$3,800+' };
+        return { duration: '2-4 Weeks', team: 'Bespoke Builder', complexity: 'RETINA catalogs + Apple Pay', baseRate: '$- on Demand' };
       default:
         return { duration: 'Flexible', team: 'Bespoke Builder', complexity: 'Flexible Scope', baseRate: 'Contact' };
     }
