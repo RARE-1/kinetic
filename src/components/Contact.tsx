@@ -161,8 +161,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="font-mono text-[9px] text-zinc-500 tracking-wider">PROJECT TEAM INBOX</div>
-                    <a href="mailto:rareone2003@gmail.com" className="font-sans font-semibold text-white hover:text-emerald-400 transition select-none">
-                      rareone2003@gmail.com
+                    <a href="mailto:kineticlogica1@gmail.com" className="font-sans font-semibold text-white hover:text-emerald-400 transition select-none">
+                      kineticlogica1@gmail.com
                     </a>
                   </div>
                 </div>
