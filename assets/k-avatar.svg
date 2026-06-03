@@ -1,0 +1,9 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="16" fill="#10B981"/>
+  
+  <!-- K letter -->
+  <g transform="translate(16, 16)">
+    <text x="0" y="0" font-size="20" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif">K</text>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "name": "Kinetic Logic Portfolio",
+  "description": "An interactive showcase and estimator tool demonstrating high-fidelity custom mobile applications for local restaurants, salons, boutique shops, and gyms.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

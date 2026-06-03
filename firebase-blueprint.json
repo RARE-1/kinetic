@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "User requested app design goals and project estimation parameters.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier of the inquiry." },
+        "name": { "type": "string", "description": "Full name of the user." },
+        "email": { "type": "string", "description": "Contact email address." },
+        "projectType": { "type": "string", "description": "Type of boutique app requested." },
+        "budget": { "type": "string", "description": "Selected target budget area." },
+        "timeline": { "type": "string", "description": "Desired delivery timeline sprints." },
+        "description": { "type": "string", "description": "Detailed description of the business goals." },
+        "createdAt": { "type": "string", "description": "UTC timestamp of submission." }
+      },
+      "required": ["id", "name", "email", "projectType", "budget", "timeline", "description", "createdAt"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "A verified recommendation or endorsement from an app client.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier of the testimonial." },
+        "name": { "type": "string", "description": "Full name of the referrer." },
+        "role": { "type": "string", "description": "Professional title/role." },
+        "company": { "type": "string", "description": "Referrer company." },
+        "logo": { "type": "string", "description": "Referral project name." },
+        "avatar": { "type": "string", "description": "URL to referrer avatar image." },
+        "content": { "type": "string", "description": "Testimonial detailed recommendation content." },
+        "rating": { "type": "integer", "description": "Star rating out of 5." },
+        "projectAssociated": { "type": "string", "description": "Associated portfolio project title." }
+      },
+      "required": ["id", "name", "role", "company", "logo", "avatar", "content", "rating", "projectAssociated"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Collection of submitted boutique project consultation blueprints"
+    },
+    "/testimonials/{testimonialId}": {
+      "schema": "Testimonial",
+      "description": "Verified recommendations database"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Catch-All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper Primitives
+    function isValidId(id) {
+      return id is string 
+        && id.size() > 0 
+        && id.size() <= 128 
+        && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // Inquiry Validator
+    function isValidInquiry(data) {
+      return data.keys().hasAll(['id', 'name', 'email', 'projectType', 'budget', 'timeline', 'description', 'createdAt'])
+        && data.keys().size() == 8
+        && data.id is string && data.id.size() > 0 && data.id.size() <= 64
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 128
+        && data.email is string && data.email.size() > 0 && data.email.size() <= 128
+        && data.projectType is string && data.projectType.size() > 0 && data.projectType.size() <= 100
+        && data.budget is string && data.budget.size() > 0 && data.budget.size() <= 100
+        && data.timeline is string && data.timeline.size() > 0 && data.timeline.size() <= 100
+        && data.description is string && data.description.size() > 0 && data.description.size() <= 1000
+        && data.createdAt is string && data.createdAt.size() > 0 && data.createdAt.size() <= 100;
+    }
+
+    // Testimonial Validator
+    function isValidTestimonial(data) {
+      return data.keys().hasAll(['id', 'name', 'role', 'company', 'logo', 'avatar', 'content', 'rating', 'projectAssociated'])
+        && data.keys().size() == 9
+        && data.id is string && data.id.size() > 0 && data.id.size() <= 64
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 128
+        && data.role is string && data.role.size() > 0 && data.role.size() <= 128
+        && data.company is string && data.company.size() > 0 && data.company.size() <= 128
+        && data.logo is string && data.logo.size() > 0 && data.logo.size() <= 128
+        && data.avatar is string && data.avatar.size() > 0 && data.avatar.size() <= 500
+        && data.content is string && data.content.size() > 0 && data.content.size() <= 1000
+        && data.rating is int && data.rating >= 1 && data.rating <= 5
+        && data.projectAssociated is string && data.projectAssociated.size() > 0 && data.projectAssociated.size() <= 128;
+    }
+
+    // Match Collection rule-block
+    match /inquiries/{inquiryId} {
+      // Create is public but strictly schema-validated
+      allow create: if isValidId(inquiryId) && isValidInquiry(incoming());
+      
+      // Zero-Trust: Reads, updates, and deletions are strictly disabled
+      allow read, update, delete: if false;
+    }
+
+    match /testimonials/{testimonialId} {
+      // Testimonials are readable by anyone
+      allow read: if true;
+      
+      // Allow creation of verified schemas publicly (e.g. for submitting reviews)
+      allow create: if isValidId(testimonialId) && isValidTestimonial(incoming());
+      
+      // Prevent modification or deletion to keep testimonials pure
+      allow update, delete: if false;
+    }
+  }
+}
