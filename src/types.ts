@@ -33,6 +33,7 @@ export interface Testimonial {
   content: string;
   rating: number;
   projectAssociated: string;
+  verified?: number;
 }
 
 export interface LifecycleStep {

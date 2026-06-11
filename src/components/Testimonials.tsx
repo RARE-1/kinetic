@@ -8,7 +8,6 @@ import { db, handleFirestoreError, OperationType } from '../firebase';
 export default function Testimonials() {
   const [reviews, setReviews] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'finance' | 'iot' | 'performance'>('all');
   
   // Custom Review Form State
   const [showForm, setShowForm] = useState(false);
@@ -64,6 +63,7 @@ export default function Testimonials() {
       content,
       rating,
       projectAssociated,
+      verified: 0,
     };
 
     const path = `testimonials/${uniqueId}`;
@@ -91,13 +91,7 @@ export default function Testimonials() {
     }
   };
 
-  const filteredReviews = reviews.filter(t => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'finance') return t.projectAssociated.includes('Finance') || t.projectAssociated.toLowerCase().includes('gusto');
-    if (activeFilter === 'iot') return t.projectAssociated.includes('Hub') || t.projectAssociated.includes('Telehealth') || t.projectAssociated.toLowerCase().includes('pulse');
-    if (activeFilter === 'performance') return t.projectAssociated.includes('Audit') || t.projectAssociated.includes('Pro') || t.projectAssociated.toLowerCase().includes('checkout') || t.projectAssociated.toLowerCase().includes('luna');
-    return true;
-  });
+  const filteredReviews = reviews;
 
   return (
     <div className="bg-zinc-950 py-16 md:py-24" id="testimonials">
@@ -114,29 +108,8 @@ export default function Testimonials() {
             </h2>
           </div>
 
-          {/* Testimonial category filters & Add Review button */}
+          {/* Add Review button */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex flex-wrap gap-2">
-              {[
-                { id: 'all', label: 'All Reviews' },
-                { id: 'finance', label: 'Ledger & Finance' },
-                { id: 'iot', label: 'IoT & Sensors' },
-                { id: 'performance', label: 'Core SLA Tuning' }
-              ].map(btn => (
-                <button
-                  key={btn.id}
-                  onClick={() => setActiveFilter(btn.id as any)}
-                  className={`px-3 py-1.5 text-[11px] font-mono uppercase rounded-lg border transition cursor-pointer select-none ${
-                    activeFilter === btn.id
-                      ? 'border-emerald-500 bg-emerald-950/20 text-emerald-400'
-                      : 'border-zinc-850 bg-zinc-900/10 text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  {btn.label}
-                </button>
-              ))}
-            </div>
-
             <button
               onClick={() => setShowForm(!showForm)}
               className="px-4 py-1.5 text-[11px] font-mono uppercase text-emerald-400 border border-emerald-500/30 bg-emerald-950/10 rounded-lg hover:bg-emerald-950/30 hover:border-emerald-500 transition duration-240 flex items-center gap-1.5 cursor-pointer"
@@ -343,7 +316,9 @@ export default function Testimonials() {
                           <span className="font-sans text-sm font-bold text-white leading-none">
                             {t.name}
                           </span>
-                          <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 fill-emerald-950/40" />
+                          {Number(t.verified) === 1 ? (
+                            <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 fill-emerald-950/40" />
+                          ) : null}
                         </div>
                         <div className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">
                           {t.role}, <span className="text-emerald-400/80">{t.company}</span>

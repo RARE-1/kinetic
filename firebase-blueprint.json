@@ -29,7 +29,8 @@
         "avatar": { "type": "string", "description": "URL to referrer avatar image." },
         "content": { "type": "string", "description": "Testimonial detailed recommendation content." },
         "rating": { "type": "integer", "description": "Star rating out of 5." },
-        "projectAssociated": { "type": "string", "description": "Associated portfolio project title." }
+        "projectAssociated": { "type": "string", "description": "Associated portfolio project title." },
+        "verified": { "type": "integer", "description": "Manual visibility flag for the verified badge. Set to 1 to show the badge." }
       },
       "required": ["id", "name", "role", "company", "logo", "avatar", "content", "rating", "projectAssociated"]
     }
